@@ -1,0 +1,128 @@
+<div class="step5">
+    <h6 class="subtitle2"> Enter Network Interface Details </h6>
+    <div>
+      <a href="javascript: void(0);" (click)="viewDetails()">View Details</a>
+    </div>
+    <form [formGroup]="networkInterface">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="name"  [(ngModel)]="name"
+              [ngClass]="{'is-invalid':submitted && networkInterface.controls['name'].errors }" />
+            <div class="text-danger fnt13px" *ngIf="submitted && networkInterface.controls['name'].errors">
+              <div *ngIf="submitted && networkInterface.controls['name'].errors['required']">
+                Field is required
+              </div>
+              <div *ngIf="submitted && networkInterface.controls['name'].errors['cannotContainSpace']">
+                Space not allowed</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Resource Group Name <span class="text-danger">*</span></label>
+              <select class="form-control"  formControlName="resourceGroupName" [(ngModel)]="resourceGroupName" (change)="resourceGroupNameChange()">
+                <option [value]="default" selected disabled>Please Choose...</option>
+                <option *ngFor="let opt of resourceGroupNameArray" [value]="opt">{{opt}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Resource Group Location <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" [(ngModel)]="resourceGroupLocation" readonly
+              formControlName="resourceGroupLocation" readonly/>
+              <!-- <select class="form-control"  formControlName="resourceGroupLocation" [(ngModel)]="resourceGroupLocation">
+                <option [value]="default" selected disabled>Please Choose...</option>
+                <option *ngFor="let opt of resourceGroupLocationArray" [value]="opt">{{opt}}</option>
+              </select> -->
+          </div>
+        </div>
+        <div class="col-md-12">
+          <fieldset>
+            <legend>IP Configuration</legend>
+            <div formGroupName="ipConfiguration">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="ipName" [(ngModel)]="ipName"/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Subnet Internal Id <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="subnetInternalId" [(ngModel)]="subnetName" readonly/>
+                    <!-- <select class="form-control"  formControlName="subnetInternalId" [(ngModel)]="subnetName">
+                      <option [value]="default" selected disabled>Please Choose...</option>
+                      <option *ngFor="let opt of subnetNameArray" [value]="opt">{{opt}}</option>
+                    </select> -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Private IP Address <span class="text-danger">*</span></label>
+                    <select class="form-control" formControlName="privateIPAddress" [(ngModel)]="privateIPAddress">
+                      <option selected>Choose...</option>
+                      <option>Static</option>
+                      <option>Dynamic</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Public IP Address <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="publicIPAddress" [(ngModel)]="publicIPAddress"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-md-12 text-center mt-4">
+          <button class="btn btnReset mr-2" (click)="backTab()">Previous</button>
+          <button class="btn btnCustom ml-2 mr-3" (click)="saveandreset()">Add Interface</button>
+          <button class="btn btnCustom ml-5" (click)="nextTab()">Next</button>
+        </div> 
+      </div>
+    </form>
+  </div>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">View Details</h4>
+      <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="fnt13px">
+        <!-- <pre>{{networkInterfaceArray | json}}</pre> -->
+        <table class="table table-striped table-hover cstTable">
+          <thead>
+            <tr>
+              <th scope="col">Name </th>
+              <th scope="col">Resource Group Name </th>
+              <th scope="col">Resource Group Location</th>
+              <th scope="col">Ip Name</th>
+              <th scope="col">Subnet Internal Id </th>
+              <th scope="col">Private IP Address </th>
+              <th scope="col">Public IP Address</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr *ngFor="let ni of networkInterfaceArray">
+              <td>{{ni.name}}</td>
+              <td>{{ni.resourceGroupName}}</td>
+              <td>{{ni.resourceGroupLocation}}</td>
+              <td>{{ni.ipConfiguration.ipName}}</td>
+              <td>{{ni.ipConfiguration.subnetInternalId}}</td>
+              <td>{{ni.ipConfiguration.privateIPAddress}}</td>
+              <td>{{ni.ipConfiguration.publicIPAddress}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>

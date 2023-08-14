@@ -1,0 +1,165 @@
+
+<div class="step5">
+    <h6 class="subtitle2"> Enter Network Security Group Details </h6>
+    <div>
+      <a href="javascript: void(0);" (click)="viewDetails()">View Details</a>
+    </div>
+    <form [formGroup]="networkSecurityGroup">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="name"  [(ngModel)]="name"
+              [ngClass]="{'is-invalid':submitted && networkSecurityGroup.controls['name'].errors }" />
+            <div class="text-danger fnt13px" *ngIf="submitted && networkSecurityGroup.controls['name'].errors">
+              <div *ngIf="submitted && networkSecurityGroup.controls['name'].errors['required']">
+                Field is required
+              </div>
+              <div *ngIf="submitted && networkSecurityGroup.controls['name'].errors['cannotContainSpace']">
+                Space not allowed</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+              <label>Resource Group Name <span class="text-danger">*</span></label>
+              <input *ngIf="!this.sessionFormData.resourceGroup" type="text" class="form-control"
+                formControlName="resourceGroupName" [(ngModel)]="resourceGroupName" />
+                <select *ngIf="this.sessionFormData.resourceGroup" class="form-control"  formControlName="resourceGroupName" [(ngModel)]="resourceGroupName" (change)="resourceGroupNameChange()">
+                <option [value]="default" selected disabled>Please Choose...</option>
+                <option *ngFor="let opt of resourceGroupNameArray" [value]="opt">{{opt}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Resource Group Location <span class="text-danger">*</span></label>
+              <input *ngIf="this.sessionFormData.resourceGroup" type="text" class="form-control"  readonly
+                formControlName="resourceGroupLocation" [(ngModel)]="resourceGroupLocation"/>
+                <select *ngIf="!this.sessionFormData.resourceGroup" class="form-control"  formControlName="resourceGroupLocation" [(ngModel)]="resourceGroupLocation">
+                  <option [value]="default" selected disabled>Please Choose...</option>
+                  <option *ngFor="let opt of resourceGroupLocationArray" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+          </div>
+        <div class="col-md-12">
+          <fieldset>
+            <legend>Security Rule </legend>
+            <div formGroupName="securityRule">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="srName" [(ngModel)]="srName"/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Priority <span class="text-danger">*</span></label>
+                        <input type="Number" class="form-control" formControlName="priority" [(ngModel)]="priority"/>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Direction <span class="text-danger">*</span></label>
+                    <select class="form-control" formControlName="direction" [(ngModel)]="direction">
+                      <option selected>Choose...</option>
+                      <option>Inbound</option>
+                      <option>Outbound</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Protocol <span class="text-danger">*</span></label>
+                      <select class="form-control" formControlName="protocol" [(ngModel)]="protocol">
+                        <option selected>Choose...</option>
+                        <option>Tcp</option>
+                        <option>Udp</option>
+                        <option>Icmp</option>
+                        <option>Esp</option>
+                        <option>Ah</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Source Port Range <span class="text-danger">*</span></label>
+                        <input type="Number" class="form-control" formControlName="sourcePortRange" [(ngModel)]="sourcePortRange"/>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Destination Port Range <span class="text-danger">*</span></label>
+                        <input type="Number" class="form-control" formControlName="destinationPortRange" [(ngModel)]="destinationPortRange"/>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Source Address Prefix <span class="text-danger">*</span></label>
+                        <input type="Number" class="form-control" formControlName="sourceAddressPrefix" [(ngModel)]="sourceAddressPrefix"/>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Destination Address Prefix  <span class="text-danger">*</span></label>
+                        <input type="Number" class="form-control" formControlName="destinationAddressPrefix" [(ngModel)]="destinationAddressPrefix"/>
+                      </div>
+                </div>
+               
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-md-12">
+            <fieldset>
+              <legend>Tags</legend>
+              <div formGroupName="tags">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Environment <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" formControlName="environment" [(ngModel)]="environment"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        <div class="col-md-12 text-center mt-4">
+          <button class="btn btnReset mr-2" (click)="backTab()">Previous</button>
+          <button class="btn btnCustom ml-2 mr-3" (click)="saveandreset()">Add Security Group</button>
+          <button class="btn btnCustom ml-5" (click)="nextTab()">Next</button>
+        </div> 
+      </div>
+    </form>
+  </div>
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">View Details</h4>
+      <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="fnt13px">
+        <!-- <pre>{{networkInterfaceArray | json}}</pre> -->
+        <table class="table table-striped table-hover cstTable">
+          <thead>
+            <tr>
+              <th scope="col">Name </th>
+              <th scope="col">Resource Group Name </th>
+              <th scope="col">Resource Group Location</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr *ngFor="let nsg of networkSecurityGrpArray">
+              <td>{{nsg.name}}</td>
+              <td>{{nsg.resourceGroupName}}</td>
+              <td>{{nsg.resourceGroupLocation}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>

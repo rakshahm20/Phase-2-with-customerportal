@@ -1,0 +1,399 @@
+<section class="pad">
+    <div class="mrgtop70">
+      <div class="mt-3"></div>
+      <div class="position-relative clearfix">
+        <div class="float-left">
+          <h5 class="subtitle"><a [routerLink]="['/home']" href="javascript: void(0);" class="backLink"><i class="fas fa-chevron-circle-left"></i> &nbsp; </a>Select Package</h5>
+        </div>
+        <div class="float-right mb-2">
+          <button class="btn btnReset" [routerLink]="['/home/history']"><i class="fa-solid fa-table-list"></i>&nbsp; <b>View History</b></button>
+        </div>
+      </div>
+      <div class="bgLiteOne mb-3">
+        <div class="row text-center">
+          <div class="col-md">
+            <h6>Customer Name</h6>
+            <h4>{{userdata.selectedCustomer}}</h4>
+          </div>
+          <div class="col-md">
+            <h6>Service Provider</h6>
+            <h4>{{userdata.selectedCloud}}</h4>
+          </div>
+          <div class="col-md">
+            <h6>Option</h6>
+            <h4>{{userdata.option}}</h4>
+          </div>
+        </div>
+      </div>
+    <div class="minHgt1">
+      <div class="row justify-content-md-center" id="services">
+        <div class="col-md-12">
+          
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Resource Group</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Resource Group" value="Resource Group" [(ngModel)]="rgservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Virtual Network</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Virtual Network" value="Virtual Network" [(ngModel)]="vnservice"><span>Choose Serivce</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Subnet</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Subnet
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Subnet" value="Subnet" [(ngModel)]="subnetservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Network Security Group</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Network Security Group
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Network Security Group" value="Network Security Group" [(ngModel)]="nsgservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Bastion Host</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Subnet
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Public IP
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Bastion Host
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Bastion Host" value="Bastion Host" [(ngModel)]="bhservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Network Interface</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Subnet
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Network Interface
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Network Interface" value="Network Interface" [(ngModel)]="niservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Virtual Machine</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Subnet
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Network Interface
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Virtual Machine" value="Virtual Machine" [(ngModel)]="vmservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Virtual Network Peering</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Virtual Network Peering" value="Virtual Network Peering" [(ngModel)]="vnpservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Virtual Network Peering</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="VN" value="VN" [(ngModel)]="vnpkg"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="row mb-3 ml-0 mr-0">
+            <div class="col-md-2 p-0 bgPart1">
+              <div class="p-2">
+                <small class="d-block">Service Name</small>
+                <strong class="d-block">Subnet Network Security Group Association</strong>
+              </div>
+            </div>
+            <div class="col-md-8 p-0 bgPart2">
+              <h6 class="d-block pl-2 pt-2 mb-0">Dependencies:</h6>
+              <div class=" p-2 choosePackage">
+                <ul class="list-inline m-0 text-left">
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Provider Details
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Resource Group
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Virtual Network
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Subnet
+                  </li>
+                  <li class="list-inline-item">
+                    <i class="fa-solid fa-circle-check"></i>&nbsp;Network Security Group
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 bgPart3">
+              <div class="">
+                <div class="selectPackage">
+                  <label>
+                    <input type="checkbox" id="Subnet Network Security Group Association" value="Subnet Network Security Group Association" [(ngModel)]="snsgaservice"><span>Choose Service</span>
+                 </label>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+   </div>
+    
+    <div class="text-center mt-2">
+      <button type="reset" class="btn btnReset mr-2" (click)="resetSelectedChoice()">Reset</button>
+      <button class="btn btnCustom ml-2" type="submit" (click)="saveData()">Save & Continue</button>
+    </div>
+    </div>
+  </section>

@@ -1,0 +1,83 @@
+<div class="step2">
+  <div class="clearfix">
+    <h6 class="subtitle2 float-left"> Enter Resource Group Details </h6>
+    <div class="float-right">
+      <a href="javascript: void(0);" class="backLink" (click)="viewDetails()"><i class="fas fa-list"></i>&nbsp;View Details</a>
+    </div>
+  </div>
+  
+  <form [formGroup]="resourceGroupDetails">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="name"
+            [ngClass]="{'is-invalid':submitted && resourceGroupDetails.controls['name'].errors }" />
+          <div class="text-danger fnt13px" *ngIf="submitted && resourceGroupDetails.controls['name'].errors">
+            <div *ngIf="submitted && resourceGroupDetails.controls['name'].errors['required']">
+              Field is required
+            </div>
+            <div *ngIf="submitted && resourceGroupDetails.controls['name'].errors['cannotContainSpace']">
+              Space not allowed</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Location <span class="text-danger">*</span></label>
+          <select class="form-control"  formControlName="location" [(ngModel)]="location"
+                [ngClass]="{'is-invalid':submitted && resourceGroupDetails.controls['location'].errors }">
+                <option [value]="default" selected disabled>Please Choose...</option>
+                <option *ngFor="let opt of resourceLocation" [value]="opt">{{opt}}</option>
+              </select>
+          <!-- <ng-multiselect-dropdown [placeholder]="'Choose location'" [settings]="dropdownSettings"
+            [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown> -->
+          <div class="text-danger fnt13px" *ngIf="submitted && resourceGroupDetails.controls['location'].errors">
+            <div *ngIf="submitted && resourceGroupDetails.controls['location'].errors['required']">
+              Field is required
+            </div>
+            <div *ngIf="submitted && resourceGroupDetails.controls['location'].errors['cannotContainSpace']">
+              Space not allowed</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 text-center mt-4">
+        <button class="btn btnReset mr-2" (click)="backTab()">Previous</button>
+        <button class="btn btnCustom ml-2 mr-3" (click)="saveandreset()">Add Resource</button>
+        <button class="btn btnCustom ml-5" (click)="nextTab()">Next</button>
+      </div>
+      <div class="col-md-12 text-center mt-4">
+        <button class="btn btnFlat ml-2" (click)="skipTab()">Skip Configuration</button>
+      </div>
+    </div>
+  </form>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">View Details</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="fnt13px">
+      <!-- <pre>{{resourceGroupArray | json}}</pre> -->
+      <table class="table table-striped table-hover cstTable">
+        <thead>
+          <tr>
+            <th scope="col">Resource Group Name </th>
+            <th scope="col">Resource Group Location </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rg of resourceGroupArray">
+            <td>{{rg.name}}</td>
+            <td>{{rg.location}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
