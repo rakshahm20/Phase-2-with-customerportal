@@ -1,0 +1,129 @@
+<div class="maincontainer brd1px">
+    <div>
+        <div class="clearfix">
+            <div class="float-left pt-2">
+                <small>Customer Name&nbsp;:</small>&nbsp;<strong>{{customerDetails?.customerName}}</strong>
+            </div>
+            <div class="float-right">
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <div class="position-relative rightBoxSearch mb-2">
+                            <input
+                            type="text" class="form-control searchTable"
+                            [(ngModel)]="searchText" autocomplete="off"
+                            placeholder="Search by Customer Name, Provider"
+                            />
+                            <i class="fa-solid fa-magnifying-glass fa-fw"></i>
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn btnReset" (click)="openModalWithClass(addPackage)">
+                            <i class="fas fa-user-plus"></i>&nbsp; <b >Add Package</b>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center" *ngIf="packagesList?.length == 0 || packagesList == null">
+          <h4>No data to display</h4>
+        </div>
+        <table class="table table-striped table-hover cstTable" *ngIf="packagesList?.length > 0">
+            <thead>
+            <tr>
+                <th>Package ID</th>
+                <th>Provider</th>
+                <th>Package Name</th>
+                <th>Status</th>
+                <th>Created Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let package of packagesList">
+                <td>{{package.packageId}}</td>
+                <td>{{package.providerName}}</td>
+                <td>{{package.packageName}}</td>
+                <td><span *ngIf="package.status" class="text-success">Active</span>
+                  <span *ngIf="!package.status" class="text-danger">Inactive</span></td>
+                <td>{{package.createdDate}}</td>
+                <td>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <i class="fas fa-pencil-alt text-primary"></i>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fas fa-ban text-danger"></i>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+<ng-template #addPackage>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add/Edit Package</h4>
+      <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #packageForm="ngForm">
+          <div class="row m-0">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Provider Name <span class="text-danger">*</span></label>
+                <select class="form-control" name="providerName" #providerName="ngModel" [(ngModel)]="packageDetails.providerName" required>
+                    <option [value]="default" selected disabled>Select</option>
+                    <option *ngFor="let provider of customerDetails.providers">{{provider}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group multiSelect">
+                <label>Services <span class="text-danger">*</span></label>
+                <ng-multiselect-dropdown name="selectedItems" 
+                    [placeholder]="'Select Services'"
+                    [settings]="dropdownSettings"
+                    [data]="dropdownList"
+                    [(ngModel)]="selectedItems"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="onItemDeSelect($event)"
+                    (onDeSelectAll)="onUnSelectAll()"
+                    required
+                    >
+                  </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label>Custom Package Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="packageName" #packageName="ngModel" [(ngModel)]="packageDetails.packageName" required/>
+                </div>
+              </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status <span class="text-danger">*</span></label>
+                <select class="form-control" name="status" #status="ngModel" [(ngModel)]="packageDetails.status">
+                  <option disabled>Select</option>
+                  <option [ngValue]="true" selected>Active</option>
+                  <option [ngValue]="false">Inactive</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12 text-center mt-3">
+                <button class="btn btnReset mr-2" (click)="modalRef?.hide()" >Cancel</button>
+                <button class="btn btnCustom ml-2 mr-3" (click)="onSubmit(packageForm)">Submit</button>
+            </div>
+        </div>
+      </form>
+    </div>
+</ng-template>
+
+<div class="loaderBG" *ngIf="loader">
+  <div class="loader"></div>
+</div>

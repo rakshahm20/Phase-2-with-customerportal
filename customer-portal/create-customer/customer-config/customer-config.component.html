@@ -1,0 +1,106 @@
+<div class="mt-2">
+    <div class="clearfix">
+        <div class="float-left">
+            <h5 class="pt-2">
+                <a class="backLink" href="javscript: void(0);" [routerLink]="['/customerportal']">
+                    <i class="fas fa-chevron-circle-left"></i>&nbsp; </a>
+                Add/Edit Customer Configuration</h5>
+        </div>
+        
+    </div>
+    <div class="maincontainer">
+        <div class="position-relative clearfix">
+            <div class="labelOne"> Customer Details </div>
+            <div class="bar"></div>
+        </div>
+        <form #customerForm="ngForm">
+            <div class="row m-0">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Customer Name <span class="text-danger">*</span></label>
+                  <input type="text" name="customerName" #customerName="ngModel" [(ngModel)]="newCustomer.customerName"
+                    class="form-control" required />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Email Id </label>
+                  <input type="text" name="emailId" #emailId="ngModel" [(ngModel)]="newCustomer.emailId" class="form-control"/>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" name="phoneNo" #phoneNo="ngModel" [(ngModel)]="newCustomer.phoneNo" class="form-control"/>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Status <span class="text-danger">*</span></label>
+                  <select class="form-control" name="status" #status="ngModel" [(ngModel)]="newCustomer.status" required>
+                    <option disabled>Select</option>
+                    <option selected>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group multiSelect">
+                  <label>Provider Name <span class="text-danger">*</span></label>
+                  <ng-multiselect-dropdown type="checkbox" name="selectedItems"
+                    [placeholder]="'Select Provider'"
+                    [settings]="dropdownSettings"
+                    [data]="dropdownList"
+                    [(ngModel)]="selectedItems"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="onItemDeSelect($event)"
+                    (onDeSelectAll)="onUnSelectAll()"
+                    required
+                    >
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Default Prefix Value</label>
+                  <input type="text" name="prefixName" #prefixName="ngModel" [(ngModel)]="newCustomer.prefixName" class="form-control"/>
+                </div>
+              </div>
+              <div class="loaderBG" *ngIf="loader">
+                <div class="loader"></div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-4 mb-4">
+                    <button class="btn btnReset mr-2" [routerLink]="['/customerportal/']">Cancel</button>
+                    <button class="btn btnCustom ml-2 mr-3" type="submit" [disabled]="customerForm.invalid" (click)="onSubmit(customerForm)">Submit</button>
+                  </div> 
+            </div>
+          </form>
+         
+            <div class="row m-0" *ngIf="editCustomer">
+                <div class="col-md-12">
+                    <div class="mt-2 subTabs">
+                        <tabset [justified]="true">
+                            <tab>
+                                <ng-template tabHeading>
+                                    <strong>Service Principle</strong>
+                                    <p class="mb-0">Add principles to the customer</p>
+                                </ng-template>
+                                <app-service-principle [customerDetails]="newCustomer"></app-service-principle>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading>
+                                    <strong>Add Package</strong>
+                                    <p class="mb-0">Add packages to the customer</p>
+                                </ng-template>
+                                <app-add-package [customerDetails]="newCustomer"></app-add-package>
+                            </tab>
+                            </tabset>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
