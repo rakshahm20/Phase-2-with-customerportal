@@ -13,6 +13,12 @@
             <div class="labelOne"> Customer Details </div>
             <div class="bar"></div>
         </div>
+        <div class="successAlert" *ngIf="showSuccessAlert">
+          <i class="fas fa-check-circle"></i>
+          <div class="">
+            <p>{{ alertMsg }}</p>
+          </div>
+        </div>
         <form #customerForm="ngForm">
             <div class="row m-0">
               <div class="col-md-4">

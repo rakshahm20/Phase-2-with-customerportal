@@ -16,6 +16,8 @@ export class CustomerConfigComponent {
   items: any = [];
   default!: string;
   loader: boolean = false;
+  showSuccessAlert: boolean = false;
+  alertMsg: string = '';
 
   newCustomer: any = {};
   editCustomer: boolean = false;
@@ -103,6 +105,13 @@ export class CustomerConfigComponent {
       this.newCustomer = response;
       sessionStorage.setItem('currentCustomer', JSON.stringify(this.newCustomer));
       this.loader = false;
+      if(response != null) {
+        this.alertMsg = 'Data saved successfully!';
+        this.showSuccessAlert = true;
+        setTimeout(() => {
+          this.showSuccessAlert = false;
+        }, 2000);
+      }
     });
     this.editCustomer = true;
   }

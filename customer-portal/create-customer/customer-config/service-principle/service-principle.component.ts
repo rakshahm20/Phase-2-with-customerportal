@@ -17,6 +17,8 @@ export class ServicePrincipleComponent {
   default!: string;
   searchText = '';
   loader: boolean = false;
+  showSuccessAlert: boolean = false;
+  alertMsg: string = '';
 
   principleDetails: any = {};
   principleList: any = [];
@@ -49,14 +51,29 @@ export class ServicePrincipleComponent {
     payload.push(this.principleDetails);
     this.customer.savePrinciple(payload).subscribe(response => {
       this.loader = false;
+      this.ngOnInit();
+      if(response != null) {
+        this.alertMsg = 'Data saved successfully!';
+        this.showSuccessAlert = true;
+        setTimeout(() => {
+          this.showSuccessAlert = false;
+        }, 2000);
+      }
     });
-    this.ngOnInit();
+    this.modalRef?.hide();
+  }
+
+  editPrinciple(principle: any, ServicePrinciple: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      ServicePrinciple,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+    this.principleDetails = principle;
   }
 
   getPrinciple(id: number) {
     this.loader = true;
     this.customer.getPrincipleById(id).subscribe(response => {
-      console.log(response);
       this.loader = false;
     });
   }

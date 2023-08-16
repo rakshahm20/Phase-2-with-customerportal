@@ -20,6 +20,8 @@ export class AddPackageComponent {
   default!: string;
   searchText = '';
   loader: boolean = false;
+  showSuccessAlert: boolean = false;
+  alertMsg: string = '';
 
   packageDetails: any = {};
   packagesList: any = [];
@@ -62,20 +64,10 @@ export class AddPackageComponent {
     };
 
     this.selectedItems = [];
+    this.packageDetails.resources = [];
 
     this.customerDetails = JSON.parse(sessionStorage.getItem('currentCustomer') || '');
     this.getPackagesList();
-  }
-
-  ngAfterViewInit() {
-    if(sessionStorage.getItem('currentCustomer') != null) {
-      this.packageDetails = JSON.parse(sessionStorage.getItem('currentCustomer') || '');
-      for (let i = 0; i < this.dropdownList.length; i++) {
-        if(this.packageDetails.resources.includes(this.dropdownList[i].item_text)) {
-          this.selectedItems.push(this.dropdownList[i]);
-        }
-      }
-    }
   }
 
   onItemSelect(item: any) {
@@ -107,8 +99,33 @@ export class AddPackageComponent {
     this.packageDetails.customerId = this.customerDetails.customerId;
     this.customer.savePackage(this.packageDetails).subscribe(response => {
       this.loader = false;
+      this.ngOnInit();
+      if(response != null) {
+        this.alertMsg = 'Data saved successfully!';
+        this.showSuccessAlert = true;
+        setTimeout(() => {
+          this.showSuccessAlert = false;
+        }, 2000);
+      }
     });
-    this.ngOnInit();
+    this.modalRef?.hide();
+  }
+
+  editPackage(packages: any, addPackage: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      addPackage,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+    this.packageDetails = packages;
+    this.selectedItems = [];
+    if(this.packageDetails.resources == null) {
+      this.packageDetails.resources = [];
+    }
+    for (let i = 0; i < this.dropdownList.length; i++) {
+      if(this.packageDetails.resources.includes(this.dropdownList[i].item_text)) {
+        this.selectedItems.push(this.dropdownList[i]);
+      }
+    }
   }
 
   getPackage(id: number) {

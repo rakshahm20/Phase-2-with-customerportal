@@ -24,6 +24,7 @@ export class CustomerDetailsComponent {
     this.loader = true;
     this.customer.getCustomerList().subscribe((response) => {
       this.customerList = response;
+      this.customerList.reverse();
       this.loader = false;
     });
   }

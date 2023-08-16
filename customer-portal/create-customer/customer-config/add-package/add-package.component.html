@@ -24,6 +24,12 @@
                 </ul>
             </div>
         </div>
+        <div class="successAlert" *ngIf="showSuccessAlert">
+          <i class="fas fa-check-circle"></i>
+          <div class="">
+            <p>{{ alertMsg }}</p>
+          </div>
+        </div>
         <div class="text-center" *ngIf="packagesList?.length == 0 || packagesList == null">
           <h4>No data to display</h4>
         </div>
@@ -49,7 +55,7 @@
                 <td>
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                            <i class="fas fa-pencil-alt text-primary"></i>
+                            <i class="fas fa-pencil-alt text-primary" (click)="editPackage(package, addPackage)"></i>
                         </li>
                         <li class="list-inline-item">
                             <i class="fas fa-ban text-danger"></i>

@@ -34,8 +34,13 @@
                         </button>
                     </li>
                 </ul>
-                
             </div>
+        </div>
+        <div class="successAlert" *ngIf="showSuccessAlert">
+          <i class="fas fa-check-circle"></i>
+          <div class="">
+            <p>{{ alertMsg }}</p>
+          </div>
         </div>
         <div class="text-center" *ngIf="principleList?.length == 0 || principleList == null">
           <h4>No data to display</h4>
@@ -62,7 +67,7 @@
                 <td>
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                          <i class="fas fa-pencil-alt text-primary"></i>
+                          <i class="fas fa-pencil-alt text-primary" type="button" (click)="editPrinciple(subscriptions, ServicePrinciple)"></i>
                         </li>
                         <li class="list-inline-item">
                             <i class="fas fa-ban text-danger"></i>
