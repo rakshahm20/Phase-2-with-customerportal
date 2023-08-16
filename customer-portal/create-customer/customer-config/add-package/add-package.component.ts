@@ -39,18 +39,26 @@ export class AddPackageComponent {
       Object.assign({}, { class: 'gray modal-lg' })
     );
     this.packageDetails = {};
-    this.packageDetails.resources = [];
+    this.packageDetails.resources = ['Provider Details', 'Resource Group'];
+    this.selectedItems = [
+      { item_id: 1, item_text: 'Provider Details', isDisabled: true },
+      { item_id: 2, item_text: 'Resource Group', isDisabled: true }
+    ];
     this.packageDetails.status = true;
   }
 
   ngOnInit() {
     this.dropdownList = [
-      { item_id: 1, item_text: 'Virtual Network' },
-      { item_id: 2, item_text: 'Subnet' },
-      { item_id: 3, item_text: 'Public Ip' },
-      { item_id: 4, item_text: 'Network Interface' },
-      { item_id: 5, item_text: 'Virtual Machine' },
-      { item_id: 6, item_text: 'Bastion Host' }
+      { item_id: 1, item_text: 'Provider Details', isDisabled: true },
+      { item_id: 2, item_text: 'Resource Group', isDisabled: true },
+      { item_id: 3, item_text: 'Virtual Network', isDisabled: false },
+      { item_id: 4, item_text: 'Subnet', isDisabled: false },
+      { item_id: 5, item_text: 'Network Security Group', isDisabled: false },
+      { item_id: 6, item_text: 'Bastion Host', isDisabled: false },
+      { item_id: 7, item_text: 'Network Interface', isDisabled: false },
+      { item_id: 8, item_text: 'Public Ip', isDisabled: false },
+      { item_id: 9, item_text: 'Virtual Machine', isDisabled: false },
+      { item_id: 10, item_text: 'Virtual Network Peering', isDisabled: false }
     ];
 
     this.dropdownSettings = {
@@ -63,8 +71,11 @@ export class AddPackageComponent {
       allowSearchFilter: true
     };
 
-    this.selectedItems = [];
-    this.packageDetails.resources = [];
+    this.selectedItems = [
+      { item_id: 1, item_text: 'Provider Details', isDisabled: true },
+      { item_id: 2, item_text: 'Resource Group', isDisabled: true }
+    ];
+    this.packageDetails.resources = ['Provider Details', 'Resource Group'];
 
     this.customerDetails = JSON.parse(sessionStorage.getItem('currentCustomer') || '');
     this.getPackagesList();
@@ -119,7 +130,16 @@ export class AddPackageComponent {
     this.packageDetails = packages;
     this.selectedItems = [];
     if(this.packageDetails.resources == null) {
-      this.packageDetails.resources = [];
+      this.packageDetails.resources = ['Provider Details', 'Resource Group'];
+    }
+    else {
+      if(!this.packageDetails.resources.includes('Provider Details')) {
+        this.packageDetails.resources.push('Provider Details');
+      }
+      if(!this.packageDetails.resources.includes('Resource Group')) {
+        this.packageDetails.resources.push('Resource Group');
+      }
+      
     }
     for (let i = 0; i < this.dropdownList.length; i++) {
       if(this.packageDetails.resources.includes(this.dropdownList[i].item_text)) {
